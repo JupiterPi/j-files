@@ -17,3 +17,17 @@
     }
   }
 }
+
+h2 {
+  display: inline-block;
+}
+
+#bookmark-button {
+  margin-left: 20px;
+  margin-bottom: 20px;
+
+  .mat-button-wrapper {
+    display: inline-flex;
+    align-items: center;
+  }
+}

@@ -13,6 +13,7 @@ export class FileViewerComponent {
   empty = false;
   files: string[] = [];
   hasWriteAccess = false;
+  bookmarked?: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -26,11 +27,16 @@ export class FileViewerComponent {
         this.files = data.items.map(item => item.name);
         this.empty = this.files.length == 0;
       });
-    });
 
-    this.user.getUser().subscribe(user => {
-      this.hasWriteAccess = user.hasWriteAccess;
+      this.user.getUser().subscribe(user => {
+        this.hasWriteAccess = user.hasWriteAccess;
+        this.bookmarked = user.bookmarkedFiles.includes(this.filename!);
+      });
     });
+  }
+
+  toggleBookmark() {
+    this.user.toggleBookmark(this.filename!);
   }
 
   openFile(file: string) {

@@ -1,5 +1,11 @@
 <h2>{{filename}}</h2>
 
+<button mat-flat-button id="bookmark-button" (click)="toggleBookmark()" *ngIf="bookmarked != undefined">
+  <mat-icon *ngIf="!bookmarked">bookmark_add</mat-icon>
+  <mat-icon *ngIf="bookmarked">bookmark</mat-icon>
+  {{bookmarked ? "Bookmarked" : "Bookmark"}}
+</button>
+
 <div id="files-container">
   <div class="file-container" *ngFor="let file of files" (click)="openFile(file)">
     {{file}}
