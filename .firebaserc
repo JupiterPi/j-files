@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "j-files-8d93d": {
+      "hosting": {
+        "j-files": [
+          "j-files-8d93d"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "j-files-8d93d"
+  }
+}

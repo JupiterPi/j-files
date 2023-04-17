@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  styleUrls: ['./app.components.scss']
 })
-export class AppComponent {
-  title = 'j-files';
-}
+export class AppComponent {}

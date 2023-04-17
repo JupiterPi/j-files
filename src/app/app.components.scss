@@ -1,0 +1,17 @@
+#title {
+  height: 100%;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+
+  #icon {
+    height: 65%;
+    clip-path: circle(50% at 50% 50%);
+    margin-right: 15px;
+  }
+
+  span {
+    font-size: 120%;
+  }
+}
