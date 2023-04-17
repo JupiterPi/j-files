@@ -10,10 +10,12 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {RouterModule} from "@angular/router";
+import { FileViewerComponent } from './ui/file-viewer/file-viewer.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    FileViewerComponent
   ],
   imports: [
     BrowserModule,
@@ -22,7 +24,11 @@ import {RouterModule} from "@angular/router";
     provideFirestore(() => getFirestore()),
     provideStorage(() => getStorage()),
     BrowserAnimationsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    RouterModule.forRoot([
+      {path: "", redirectTo: "test", pathMatch: "full"},
+      {path: ":file", component: FileViewerComponent}
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
