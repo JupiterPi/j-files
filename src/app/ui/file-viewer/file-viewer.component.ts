@@ -62,6 +62,7 @@ export class FileViewerComponent {
 
   deleteAll() {
     this.files.forEach(file => this.deleteFile(file));
+    if (this.bookmarked) this.toggleBookmark();
   }
 
   uploadFiles(event: Event) {
@@ -73,5 +74,7 @@ export class FileViewerComponent {
       task.percentageChanges().subscribe(percentage => console.log(percentage));
       task.then(() => this.loadFiles());
     }
+
+    if (!this.bookmarked) this.toggleBookmark();
   }
 }
