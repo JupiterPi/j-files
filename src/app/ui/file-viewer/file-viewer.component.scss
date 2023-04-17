@@ -8,6 +8,10 @@
     border-bottom: 1px solid #d3d3d3;
     cursor: pointer;
 
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
     &:hover {
       background: #eaeaea;
     }
@@ -32,6 +36,8 @@ h2 {
   }
 }
 
-#upload-button {
+#write-buttons {
   margin-top: 15px;
+  display: flex;
+  gap: 10px;
 }

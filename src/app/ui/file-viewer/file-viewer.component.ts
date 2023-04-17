@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {UserService} from "../../user.service";
 
@@ -15,10 +15,13 @@ export class FileViewerComponent {
   hasWriteAccess = false;
   bookmarked?: boolean;
 
+  clickToDelete = false;
+
   constructor(
     private route: ActivatedRoute,
     private storage: AngularFireStorage,
     private user: UserService,
+    private router: Router,
   ) {
     this.route.params.subscribe(params => {
       this.filename = params["file"];
@@ -46,6 +49,19 @@ export class FileViewerComponent {
     this.storage.ref("/files/" + this.filename + "/" + file).getDownloadURL().subscribe(url => {
       window.open(url);
     });
+  }
+
+  deleteFile(file: string) {
+    this.storage.ref("/files/" + this.filename + "/" + file).delete().subscribe(() => {
+      this.loadFiles();
+      setTimeout(() => {
+        if (this.empty) this.clickToDelete = false;
+      }, 500);
+    });
+  }
+
+  deleteAll() {
+    this.files.forEach(file => this.deleteFile(file));
   }
 
   uploadFiles(event: Event) {

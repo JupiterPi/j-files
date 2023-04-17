@@ -7,8 +7,9 @@
 </button>
 
 <div id="files-container">
-  <div class="file-container" *ngFor="let file of files" (click)="openFile(file)">
+  <div class="file-container" *ngFor="let file of files" (click)="clickToDelete ? deleteFile(file) : openFile(file)">
     {{file}}
+    <mat-icon *ngIf="clickToDelete">delete</mat-icon>
   </div>
 </div>
 
@@ -16,7 +17,16 @@
   No files available!
 </div>
 
-<button mat-raised-button id="upload-button" *ngIf="hasWriteAccess" (click)="fileInput.click()">
-  Upload file(s)
-</button>
+<div id="write-buttons" *ngIf="hasWriteAccess">
+  <button mat-raised-button id="upload-button" (click)="fileInput.click()">
+    Upload file(s)
+  </button>
+  <button mat-raised-button (click)="clickToDelete = !clickToDelete" *ngIf="!empty">
+    Delete files {{clickToDelete ? "(stop)" : ""}}
+  </button>
+  <button mat-raised-button (click)="deleteAll()">
+    Delete all
+  </button>
+</div>
+
 <input type="file" multiple (change)="uploadFiles($event)" hidden #fileInput>
