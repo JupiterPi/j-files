@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {UserService} from "../../user.service";
+import {first} from "rxjs";
 
 @Component({
   selector: 'app-file-viewer',
@@ -13,7 +14,7 @@ export class FileViewerComponent {
   empty = false;
   files: string[] = [];
   hasWriteAccess = false;
-  bookmarked?: boolean;
+  bookmarked = false;
 
   clickToDelete = false;
 
@@ -42,7 +43,13 @@ export class FileViewerComponent {
   }
 
   toggleBookmark() {
-    this.user.toggleBookmark(this.filename!);
+    this.user.isLoggedIn$.pipe(first()).subscribe(isLoggedIn => {
+      if (isLoggedIn) {
+        this.user.toggleBookmark(this.filename!);
+      } else {
+        this.router.navigate([""]);
+      }
+    });
   }
 
   openFile(file: string) {

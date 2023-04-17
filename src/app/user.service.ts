@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {AngularFirestore, AngularFirestoreDocument} from "@angular/fire/compat/firestore";
-import {AngularFireAuth} from "@angular/fire/compat/auth";
 import {BehaviorSubject, filter, first} from "rxjs";
 import {isNonNull} from "../util";
+import {AuthService} from "./auth.service";
 
 export interface User {
   hasWriteAccess: boolean;
@@ -13,33 +13,37 @@ export interface User {
   providedIn: 'root'
 })
 export class UserService {
-  $userRef = new BehaviorSubject<AngularFirestoreDocument | undefined>(undefined);
-  $user = new BehaviorSubject<User | undefined>(undefined);
+  isLoggedIn$ = new BehaviorSubject<boolean>(false);
+  userRef$ = new BehaviorSubject<AngularFirestoreDocument | undefined>(undefined);
+  user$ = new BehaviorSubject<User | undefined>(undefined);
 
   constructor(
     private db: AngularFirestore,
-    private auth: AngularFireAuth,
+    private auth: AuthService,
   ) {
     this.auth.user
-      .pipe(filter(user => user != null))
       .subscribe(user => {
-        const userRef = this.db.doc<User>("users/" + user?.uid);
-        this.$userRef.next(userRef);
-        userRef.valueChanges().subscribe(userDoc => {
-          if (userDoc == undefined) {
-            userRef.set({
-              hasWriteAccess: false,
-              bookmarkedFiles: []
-            });
-          } else {
-            this.$user.next(userDoc);
-          }
-        });
+        console.log(user);
+        this.isLoggedIn$.next(user != null);
+        if (user != null) {
+          const userRef = this.db.doc<User>("users/" + user?.uid);
+          this.userRef$.next(userRef);
+          userRef.valueChanges().subscribe(userDoc => {
+            if (userDoc == undefined) {
+              userRef.set({
+                hasWriteAccess: false,
+                bookmarkedFiles: []
+              });
+            } else {
+              this.user$.next(userDoc);
+            }
+          });
+        }
       });
   }
 
   getUser() {
-    return this.$user.pipe(filter(isNonNull));
+    return this.user$.pipe(filter(isNonNull));
   }
 
   toggleBookmark(file: string) {
@@ -49,7 +53,7 @@ export class UserService {
       } else {
         user.bookmarkedFiles.unshift(file);
       }
-      this.$userRef.subscribe(userRef => {
+      this.userRef$.subscribe(userRef => {
         userRef?.set(user);
       });
     });

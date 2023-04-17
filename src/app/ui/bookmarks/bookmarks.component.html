@@ -1,6 +1,6 @@
 <h2>Bookmarks</h2>
 
-<div id="bookmarks-container">
+<div id="bookmarks-container" *ngIf="isLoggedIn">
 
   <mat-card class="bookmark" *ngIf="hasWriteAccess" (click)="createFile()">
     <mat-icon>add</mat-icon>
@@ -11,8 +11,14 @@
     <div class="bookmark-name">{{bookmark}}</div>
   </mat-card>
 
-  <div *ngIf="bookmarks.length == 0">
+  <div *ngIf="bookmarks.length == 0 && isLoggedIn">
     No bookmarks.
   </div>
 
+</div>
+
+<div *ngIf="!isLoggedIn">
+  Log in to bookmark files and access them later.
+  <br><br>
+  <button mat-raised-button color="accent" (click)="auth.login()">Login</button>
 </div>

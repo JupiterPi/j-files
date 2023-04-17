@@ -1,9 +1,9 @@
 <h2>{{filename}}</h2>
 
-<button mat-flat-button id="bookmark-button" (click)="toggleBookmark()" *ngIf="bookmarked != undefined">
+<button mat-flat-button id="bookmark-button" (click)="toggleBookmark()">
   <mat-icon *ngIf="!bookmarked">bookmark_add</mat-icon>
   <mat-icon *ngIf="bookmarked">bookmark</mat-icon>
-  {{bookmarked ? "Bookmarked" : "Bookmark"}}
+  <span>{{bookmarked ? "Bookmarked" : "Bookmark"}}</span>
 </button>
 
 <div id="files-container">

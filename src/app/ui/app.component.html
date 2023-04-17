@@ -15,12 +15,12 @@
 
   <div id="auth">
     <ng-container *ngIf="(auth.user | async) == null">
-      <button mat-raised-button color="accent" (click)="login()">Login</button>
+      <button mat-raised-button color="accent" (click)="auth.login()">Login</button>
     </ng-container>
     <ng-container *ngIf="auth.user | async as user">
       <div id="username">{{user.displayName}}</div>
       <div id="photo"><img [src]="user.photoURL"></div>
-      <button mat-stroked-button (click)="logout()">Logout</button>
+      <button mat-stroked-button (click)="auth.logout()">Logout</button>
     </ng-container>
   </div>
 </mat-toolbar>
