@@ -3,6 +3,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
 import {UserService} from "../../user.service";
 import {first} from "rxjs";
+import {AuthService} from "../../auth.service";
 
 @Component({
   selector: 'app-file-viewer',
@@ -22,7 +23,7 @@ export class FileViewerComponent {
     private route: ActivatedRoute,
     private storage: AngularFireStorage,
     private user: UserService,
-    private router: Router,
+    private auth: AuthService,
   ) {
     this.route.params.subscribe(params => {
       this.filename = params["file"];
@@ -47,7 +48,7 @@ export class FileViewerComponent {
       if (isLoggedIn) {
         this.user.toggleBookmark(this.filename!);
       } else {
-        this.router.navigate([""]);
+        this.auth.login();
       }
     });
   }
