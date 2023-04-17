@@ -14,27 +14,29 @@ import { FileViewerComponent } from './ui/file-viewer/file-viewer.component';
 import {MatButtonModule} from "@angular/material/button";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
+import { BookmarksComponent } from './ui/bookmarks/bookmarks.component';
+import {MatCardModule} from "@angular/material/card";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
     AppComponent,
-    FileViewerComponent
+    FileViewerComponent,
+    BookmarksComponent
   ],
   imports: [
     BrowserModule,
-    /*provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore()),
-    provideStorage(() => getStorage()),*/
     BrowserAnimationsModule,
     MatToolbarModule,
     RouterModule.forRoot([
-      {path: "", redirectTo: "test", pathMatch: "full"},
+      {path: "", component: BookmarksComponent},
       {path: ":file", component: FileViewerComponent}
     ]),
     MatButtonModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    MatCardModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,18 @@
+<h2>Bookmarks</h2>
+
+<div id="bookmarks-container">
+
+  <mat-card class="bookmark" *ngIf="hasWriteAccess" (click)="createFile()">
+    <mat-icon>add</mat-icon>
+    <div class="bookmark-name">New</div>
+  </mat-card>
+
+  <mat-card class="bookmark" *ngFor="let bookmark of bookmarks" [routerLink]="bookmark">
+    <div class="bookmark-name">{{bookmark}}</div>
+  </mat-card>
+
+  <div *ngIf="bookmarks.length == 0">
+    No bookmarks.
+  </div>
+
+</div>

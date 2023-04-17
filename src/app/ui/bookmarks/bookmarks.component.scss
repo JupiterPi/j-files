@@ -1,0 +1,24 @@
+#bookmarks-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+
+.bookmark {
+  padding: 15px 20px;
+  border: 1px solid #bebebe;
+  cursor: pointer;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+
+  &:hover {
+    background-color: #f3f3f3;
+  }
+
+  .bookmark-name {
+
+  }
+}

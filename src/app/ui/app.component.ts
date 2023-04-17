@@ -17,4 +17,6 @@ export class AppComponent {
   logout() {
     this.auth.signOut();
   }
+
+  protected readonly JSON = JSON;
 }

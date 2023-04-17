@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {AngularFireStorage} from "@angular/fire/compat/storage";
-import {CacheMap} from "../../../util";
-import {BehaviorSubject, Observable} from "rxjs";
+import {UserService} from "../../user.service";
 
 @Component({
   selector: 'app-file-viewer',
@@ -13,10 +12,12 @@ export class FileViewerComponent {
   filename?: string;
   empty = false;
   files: string[] = [];
+  hasWriteAccess = false;
 
   constructor(
     private route: ActivatedRoute,
     private storage: AngularFireStorage,
+    private user: UserService,
   ) {
     this.route.params.subscribe(params => {
       this.filename = params["file"];
@@ -26,13 +27,15 @@ export class FileViewerComponent {
         this.empty = this.files.length == 0;
       });
     });
+
+    this.user.getUser().subscribe(user => {
+      this.hasWriteAccess = user.hasWriteAccess;
+    });
   }
 
-  downloadUrls = new CacheMap<string, Observable<string>>(file => {
-    const s = new BehaviorSubject("");
+  openFile(file: string) {
     this.storage.ref("/files/" + this.filename + "/" + file).getDownloadURL().subscribe(url => {
-      s.next(url);
+      window.open(url);
     });
-    return s;
-  });
+  }
 }
