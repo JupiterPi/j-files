@@ -1,0 +1,21 @@
+<h2>Welcome on J Files</h2>
+
+<h3>&rightarrow; I've got a link</h3>
+
+<div>
+  files.jupiterpi.de/<input id="filename-input" [(ngModel)]="filename">
+  <button mat-icon-button (click)="submitFilename()" *ngIf="filename != ''">
+    <mat-icon>arrow_forward</mat-icon>
+  </button>
+</div>
+
+<h3>&rightarrow; I have a saved bookmark</h3>
+
+<ng-container *ngIf="!isLoggedIn">
+  You need to log in to view your saved bookmarks.
+  <br><br>
+  <button mat-raised-button color="accent" (click)="auth.login()">Login</button>
+</ng-container>
+<ng-container *ngIf="isLoggedIn">
+  <button mat-raised-button color="primary" routerLink="bookmarks">View Bookmarks</button>
+</ng-container>

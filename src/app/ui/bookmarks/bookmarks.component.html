@@ -7,7 +7,7 @@
     <div class="bookmark-name">New</div>
   </mat-card>
 
-  <mat-card class="bookmark" *ngFor="let bookmark of bookmarks" [routerLink]="bookmark">
+  <mat-card class="bookmark" *ngFor="let bookmark of bookmarks" [routerLink]="'/' + bookmark">
     <div class="bookmark-name">{{bookmark}}</div>
   </mat-card>
 

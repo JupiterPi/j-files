@@ -17,26 +17,31 @@ import {AngularFireAuthModule} from "@angular/fire/compat/auth";
 import { BookmarksComponent } from './ui/bookmarks/bookmarks.component';
 import {MatCardModule} from "@angular/material/card";
 import {MatIconModule} from "@angular/material/icon";
+import { HomePageComponent } from './ui/home-page/home-page.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     FileViewerComponent,
-    BookmarksComponent
+    BookmarksComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     RouterModule.forRoot([
-      {path: "", component: BookmarksComponent},
+      {path: "", component: HomePageComponent},
+      {path: "bookmarks", component: BookmarksComponent},
       {path: ":file", component: FileViewerComponent}
     ]),
     MatButtonModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

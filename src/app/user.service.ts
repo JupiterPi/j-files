@@ -23,7 +23,6 @@ export class UserService {
   ) {
     this.auth.user
       .subscribe(user => {
-        console.log(user);
         this.isLoggedIn$.next(user != null);
         if (user != null) {
           const userRef = this.db.doc<User>("users/" + user?.uid);

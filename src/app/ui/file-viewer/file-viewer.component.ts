@@ -79,7 +79,6 @@ export class FileViewerComponent {
     for (let i = 0; i < fileList.length; i++) {
       const file = fileList.item(i)!;
       const task = this.storage.upload("/files/" + this.filename + "/" + file.name, file);
-      task.percentageChanges().subscribe(percentage => console.log(percentage));
       task.then(() => this.loadFiles());
     }
 
