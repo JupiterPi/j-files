@@ -15,3 +15,8 @@
 <div id="empty" *ngIf="empty">
   No files available!
 </div>
+
+<button mat-raised-button id="upload-button" *ngIf="hasWriteAccess" (click)="fileInput.click()">
+  Upload file(s)
+</button>
+<input type="file" multiple (change)="uploadFiles($event)" hidden #fileInput>
