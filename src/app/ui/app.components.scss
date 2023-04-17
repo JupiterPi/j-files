@@ -1,5 +1,17 @@
+#container {
+  padding: 20px;
+}
+
 mat-toolbar {
   justify-content: space-between;
+
+  .toolbar-section {
+    gap: 20px;
+  }
+
+  #bookmarks-button span {
+    margin-left: 10px;
+  }
 
   div {
     height: 100%;
@@ -43,12 +55,28 @@ mat-toolbar {
   }
 }
 
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 480px) {
   #username {
     display: none;
   }
 }
 
-#container {
-  padding: 20px;
+@media screen and (max-width: 600px) {
+  #bookmarks-button span {
+    display: none;
+  }
+}
+
+#title-j {
+  padding-right: 5px;
+  display: none;
+}
+@media screen and (max-width: 370px) {
+  #icon {
+    display: none;
+  }
+
+  #title-j {
+    display: inline;
+  }
 }

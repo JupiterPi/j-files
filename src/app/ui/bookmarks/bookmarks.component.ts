@@ -23,6 +23,6 @@ export class BookmarksComponent {
 
   createFile() {
     const name = prompt("New file name:")?.replace(" ", "-");
-    this.router.navigate([name]);
+    if (name) this.router.navigate([name]);
   }
 }
