@@ -1,5 +1,5 @@
 <mat-toolbar color="primary">
-  <div id="title">
+  <div id="title" routerLink="">
     <img id="icon" src="/assets/logo-backgr-white-256.png">
     <span>Files</span>
   </div>
@@ -16,4 +16,6 @@
   </div>
 </mat-toolbar>
 
-<router-outlet></router-outlet>
+<div id="container">
+  <router-outlet></router-outlet>
+</div>

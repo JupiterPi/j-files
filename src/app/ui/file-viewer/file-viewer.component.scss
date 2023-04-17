@@ -1,0 +1,18 @@
+#files-container {
+  width: fit-content;
+
+  .file-container {
+    padding: 20px;
+    padding-right: 50px;
+    background: #f8f8f8;
+    border-bottom: 1px solid #d3d3d3;
+
+    &:hover {
+      background: #eaeaea;
+    }
+
+    a {
+      color: black;
+    }
+  }
+}

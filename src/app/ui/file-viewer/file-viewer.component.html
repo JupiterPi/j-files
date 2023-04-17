@@ -1,1 +1,13 @@
-<p>file-viewer works!</p>
+<h2>{{filename}}</h2>
+
+<div id="files-container">
+  <div class="file-container" *ngFor="let file of files">
+    <a [href]="downloadUrls.get(file) | async" target="_blank">
+      {{file}}
+    </a>
+  </div>
+</div>
+
+<div id="empty" *ngIf="empty">
+  No files available!
+</div>
