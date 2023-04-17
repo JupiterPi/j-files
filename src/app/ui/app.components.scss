@@ -1,0 +1,50 @@
+mat-toolbar {
+  justify-content: space-between;
+
+  div {
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+
+    &#title {
+      cursor: pointer;
+
+      #icon {
+        height: 65%;
+        clip-path: circle(50% at 50% 50%);
+        margin-right: 15px;
+      }
+
+      span {
+        font-size: 120%;
+      }
+    }
+
+    &#auth {
+      gap: 10px;
+
+      display: flex;
+      align-items: center;
+
+      #username {
+        font-size: 16px;
+      }
+
+      #photo {
+        height: 30px;
+        clip-path: circle(50% at 50% 50%);
+
+        img {
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 450px) {
+  #username {
+    display: none;
+  }
+}
