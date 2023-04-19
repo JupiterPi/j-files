@@ -1,4 +1,4 @@
-<h2>{{filename}}</h2>
+<h2>{{bucketName}}</h2>
 
 <button mat-flat-button id="bookmark-button" (click)="toggleBookmark()">
   <mat-icon *ngIf="!bookmarked">bookmark_add</mat-icon>
@@ -7,24 +7,24 @@
 </button>
 
 <div id="files-container">
-  <div class="file-container" *ngFor="let file of files" (click)="clickToDelete ? deleteFile(file) : openFile(file)">
+  <div class="file-container" *ngFor="let file of bucketFiles" (click)="clickToDelete ? deleteFile(file) : openFile(file)">
     {{file}}
     <mat-icon *ngIf="clickToDelete">delete</mat-icon>
   </div>
 </div>
 
-<div id="empty" *ngIf="empty">
+<div id="empty" *ngIf="bucketFiles.length == 0">
   No files available!
 </div>
 
-<div id="write-buttons" *ngIf="hasWriteAccess">
+<div id="write-buttons" *ngIf="hasBucketWriteAccess">
   <button mat-raised-button id="upload-button" (click)="fileInput.click()">
     Upload file(s)
   </button>
-  <button mat-raised-button (click)="clickToDelete = !clickToDelete" *ngIf="!empty">
+  <button mat-raised-button (click)="clickToDelete = !clickToDelete" *ngIf="bucketFiles.length > 0">
     Delete files {{clickToDelete ? "(stop)" : ""}}
   </button>
-  <button mat-raised-button (click)="deleteAll()">
+  <button mat-raised-button (click)="deleteAll()" *ngIf="userHasWriteAccess">
     Delete all
   </button>
 </div>

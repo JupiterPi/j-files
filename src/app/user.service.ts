@@ -6,7 +6,7 @@ import {AuthService} from "./auth.service";
 
 export interface User {
   hasWriteAccess: boolean;
-  bookmarkedFiles: string[];
+  bookmarkedBuckets: string[];
 }
 
 @Injectable({
@@ -31,7 +31,7 @@ export class UserService {
             if (userDoc == undefined) {
               userRef.set({
                 hasWriteAccess: false,
-                bookmarkedFiles: []
+                bookmarkedBuckets: []
               });
             } else {
               this.user$.next(userDoc);
@@ -47,10 +47,10 @@ export class UserService {
 
   toggleBookmark(file: string) {
     this.getUser().pipe(first()).subscribe(user => {
-      if (user.bookmarkedFiles.includes(file)) {
-        user.bookmarkedFiles = user.bookmarkedFiles.filter(bookmark => bookmark != file);
+      if (user.bookmarkedBuckets.includes(file)) {
+        user.bookmarkedBuckets = user.bookmarkedBuckets.filter(bookmark => bookmark != file);
       } else {
-        user.bookmarkedFiles.unshift(file);
+        user.bookmarkedBuckets.unshift(file);
       }
       this.userRef$.subscribe(userRef => {
         userRef?.set(user);

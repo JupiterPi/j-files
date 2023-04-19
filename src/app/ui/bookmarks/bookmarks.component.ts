@@ -27,7 +27,7 @@ export class BookmarksComponent {
       }
     });
     this.user.getUser().subscribe(user => {
-      this.bookmarks = user.bookmarkedFiles;
+      this.bookmarks = user.bookmarkedBuckets;
       this.hasWriteAccess = user.hasWriteAccess;
     });
   }

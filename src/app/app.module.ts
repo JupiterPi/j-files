@@ -10,7 +10,7 @@ import { provideStorage,getStorage } from '@angular/fire/storage';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {RouterModule} from "@angular/router";
-import { FileViewerComponent } from './ui/file-viewer/file-viewer.component';
+import { BucketViewerComponent } from './ui/bucket-viewer/bucket-viewer.component';
 import {MatButtonModule} from "@angular/material/button";
 import {AngularFireModule} from "@angular/fire/compat";
 import {AngularFireAuthModule} from "@angular/fire/compat/auth";
@@ -23,7 +23,7 @@ import {FormsModule} from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent,
-    FileViewerComponent,
+    BucketViewerComponent,
     BookmarksComponent,
     HomePageComponent
   ],
@@ -34,7 +34,7 @@ import {FormsModule} from "@angular/forms";
     RouterModule.forRoot([
       {path: "", component: HomePageComponent},
       {path: "bookmarks", component: BookmarksComponent},
-      {path: ":file", component: FileViewerComponent}
+      {path: ":bucket", component: BucketViewerComponent}
     ]),
     MatButtonModule,
     AngularFireModule.initializeApp(environment.firebase),
